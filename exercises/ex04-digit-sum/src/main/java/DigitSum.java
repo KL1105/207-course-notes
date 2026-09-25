@@ -21,7 +21,27 @@ public class DigitSum {
      * @return the sum of its decimal digits
      */
     public static int digitSum(int n) {
-        // TODO: complete
-        return 0;
+        String temp;
+        int i = 0; // counter for length
+        int d = 0; // total collecter for digits
+
+        if (n < 0){
+            temp = "" + (-1)*n;
+        }
+        else {
+            temp = "" + n;
+        }
+
+        int[] c = new int[temp.length()];
+        for (int j = 0; j < temp.length(); j++){
+            c[j] = Character.getNumericValue(temp.charAt(j));
+        }
+
+        while (i < temp.length()) {
+            d += c[i];
+            i++;
+        }
+
+        return d;
     }
 }
