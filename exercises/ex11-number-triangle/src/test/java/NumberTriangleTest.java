@@ -8,20 +8,20 @@ class NumberTriangleTest {
 
   @Test
   void rootTree() throws IOException {
-    NumberTriangle mt = NumberTriangle.loadTriangle("input_tree.txt");
+    NumberTriangle mt = NumberTriangle.loadTriangle("src/input_tree.txt");
     assertEquals(75, mt.retrieve(""));
   }
 
   @Test
   void retrieveTreeBasic() throws IOException {
-    NumberTriangle mt = NumberTriangle.loadTriangle("input_tree.txt");
+    NumberTriangle mt = NumberTriangle.loadTriangle("src/input_tree.txt");
     assertEquals(47, mt.retrieve("lr"));
   }
 
   /** The nodes at mt.left.right and mt.right.left are the same object. */
   @Test
   void aliasingTree() throws IOException {
-    NumberTriangle mt = NumberTriangle.loadTriangle("input_tree.txt");
+    NumberTriangle mt = NumberTriangle.loadTriangle("src/input_tree.txt");
     assertEquals(mt.retrieve("lr"), mt.retrieve("rl"));
   }
 
@@ -35,7 +35,7 @@ class NumberTriangleTest {
 
   @Test
   void bigTreeLeftMost() throws IOException {
-    NumberTriangle mt = NumberTriangle.loadTriangle("input_tree.txt");
+    NumberTriangle mt = NumberTriangle.loadTriangle("src/input_tree.txt");
     assertEquals(4, mt.retrieve("llllllllllllll"));
   }
 }

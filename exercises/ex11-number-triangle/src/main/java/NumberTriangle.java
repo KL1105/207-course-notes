@@ -109,7 +109,14 @@ public class NumberTriangle {
     //       value of wherever you ended up. An empty path means "stay here".
     //       Hint: String#charAt(int) and String#length() are all you need for the
     //       iterative version; a recursive version can use String#substring(1).
-    return 0;
+    if (path.isEmpty()) {
+      return this.getRoot();
+    } else if (path.charAt(0) == 'l'){
+        this.left.retrieve(path.substring(1));
+    } else if (path.charAt(0) == 'r'){
+        this.right.retrieve(path.substring(1));
+    }
+    return this.getRoot();
   }
 
   /**
@@ -200,7 +207,7 @@ public class NumberTriangle {
    * @throws IOException if the file cannot be read
    */
   public static void main(String[] args) throws IOException {
-    NumberTriangle mt = NumberTriangle.loadTriangle("input_tree.txt");
+    NumberTriangle mt = NumberTriangle.loadTriangle("src/input_tree.txt");
     System.out.println("Root of the triangle: " + mt.getRoot());
   }
 }
