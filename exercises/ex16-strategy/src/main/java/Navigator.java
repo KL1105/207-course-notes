@@ -22,7 +22,7 @@ public class Navigator {
    * @param generator the direction-generating strategy to start with
    */
   public Navigator(DirectionGenerator generator) {
-    // TODO: store the strategy in the field.
+    this.generator = generator;
   }
 
   /**
@@ -31,7 +31,7 @@ public class Navigator {
    * @param generator the new direction-generating strategy
    */
   public void setDirectionGenerator(DirectionGenerator generator) {
-    // TODO: replace the current strategy.
+    this.generator = generator;
   }
 
   /**
@@ -43,6 +43,6 @@ public class Navigator {
    */
   public String getDirections(String destination) {
     // TODO: ask the current strategy for the directions and return them.
-    return "";
+    return this.generator.getDirections(destination);
   }
 }

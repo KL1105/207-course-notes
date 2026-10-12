@@ -9,6 +9,6 @@ public class TransitDirections implements DirectionGenerator {
   @Override
   public String getDirections(String destination) {
     // TODO: return "Take transit to " followed by the destination.
-    return "";
+    return "Take transit to " + destination;
   }
 }
