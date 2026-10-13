@@ -18,14 +18,14 @@ hide empty members
 '   Interface <|.. Class    ' realization:    Class implements Interface
 ' (Putting the parent/interface on the LEFT of the arrow keeps it on top.)
 
+interface Chargeable {
+  + charge() : void
+}
+
 abstract class Vehicle {
   # make : String
   + Vehicle(make : String)
   + maxSpeed() : int
-}
-
-interface Chargeable {
-  + charge() : void
 }
 
 ' Extends class Vehicle but does not realize Chargeable
