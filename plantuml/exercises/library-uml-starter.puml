@@ -11,6 +11,19 @@ hide empty members
 ' (Item) is filled in as an example — decide on the rest yourself. There is more
 ' than one defensible answer.
 '
+
+
+' A library lets members borrow items.
+' Each item has a title and a unique catalogue number.
+' Books can be borrowed for three weeks;
+' DVDs can be borrowed for one week.
+' Some items are reference-only and cannot be borrowed at all.
+' Members log in with a member number and
+' can place a hold on an item that is currently on loan.
+' Librarians can add new items to the catalogue
+' and can waive a member's late fee.
+
+
 ' PlantUML cheat-sheet:
 '   interface Name { + method() : Type }
 '   abstract class Name { # field : Type }
@@ -30,16 +43,102 @@ abstract class Item {
 ' TODO: add boxes for Book and DVD. What differs between them — a whole class,
 '       or just the value of a loan-period field?
 
+' Interface for items that can be borrowed
+interface Borrowable {
+  - holdStatus : boolean
+  + getLoanPeriod() : int
+  + borrowItem(member : Member) : void
+}
+
+' Book class extending Item and realizing Borrowable
+class Book {
+  - title : String
+  - loanPeriod : int = 21
+  + getLoanPeriod() : int
+  + borrowItem(member : Member) : void
+  - catalogueNumber : String
+  + getTitle() : String
+  + getCatalogueNumber() : String
+}
+
+'  DVD class extending Item and realizing Borrowable
+class DVD {
+  - title : String
+  - loanPeriod : int = 7
+  + getLoanPeriod() : int
+  + borrowItem(member : Member) : void
+  - catalogueNumber : String
+  + getTitle() : String
+  + getCatalogueNumber() : String
+}
+
 ' TODO: reference-only items cannot be borrowed at all. Decide how to say that
 '       in the diagram: a subclass, or an interface (e.g. "Borrowable") that
 '       only some items realize?
 
+' Reference-only item only extends Item. Does not realize Borrowable reference-only
+class Reference {
+  - title : String
+  - catalogueNumber : String
+  + getTitle() : String
+  + getCatalogueNumber() : String
+}
+
 ' TODO: add Member and Librarian. What do they have in common? Add the common
 '       supertype if you think one is warranted.
+' Abstract for people types
+ abstract class Person {
+  - memberNumber : int
+  + getMemberNumber() : int
+  + placeHold(item : Borrowable) : Hold
+}
+
+' Interface for Management of new books and late fees
+interface Management {
+  + addBook(title : String, catalogueNumber : String, loanPeriod : int, librarian : Librarian) : void
+  + waiveLateFee(librarian : Librarian, member : Member, catalogueNumber : String) : void
+}
+
+' Member extends Person
+class Member {
+  - memberNumber : int
+  + getMemberNumber() : int
+  + login(memberNumber : String) : void
+}
+
+'  Librarian extends Person and realizes Management
+' in our design we want Librarian to also have member number so they can perform member actions
+
+class Librarian {
+  - memberNumber : int
+  + getMemberNumber() : int
+  + addBook(title : String, catalogueNumber : String, loanPeriod : int, librarian : Librarian) : void
+  + waiveLateFee(librarian : Librarian, member : Member, catalogueNumber : String) : void
+}
 
 ' TODO: add whatever represents a hold, and connect it to the classes that need
 '       to know about it.
+class Hold {
+  - active : boolean
+  + getHoldStatus() : boolean
+}
 
 ' TODO: add the arrows between all of your types.
+Item <|-- Book
+Item <|-- DVD
+Item <|-- Reference
+
+Person <|-- Member
+Person <|-- Librarian
+
+Borrowable <|.. Book
+Borrowable <|.. DVD
+
+Management <|.. Librarian
+
+'
+Member "1" --> "*" Hold : places >
+Borrowable "1" --> "*" Hold : has >
+Member "0..*" --> "*" Borrowable : borrows >
 
 @enduml
