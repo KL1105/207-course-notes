@@ -27,21 +27,26 @@ interface Chargeable {
 '       types.
 
 abstract class Vehicle {
-  + charge() : void
+  + Vehicle(make : String) : void
+  + maxSpeed() : int
 }
 
 ' Extends class Vehicle but does not realize Chargeable
 class Car {
-  + fillUp() : void
+  + Car(make : String) : void
+  + maxSpeed() : int
 }
 
 ' Extends class Vehicle and also realizes interface Chargeable
 class ElectricCar {
+ - batteryLevel : int
+ + ElectricCar(make : String) : void
+ + maxSpeed() : int
  + charge() : void
 }
 
 Vehicle <|-- Car
-Vehicle <|-- ElectricCar
+Car <|-- ElectricCar
 
 Chargeable <|.. ElectricCar
 
