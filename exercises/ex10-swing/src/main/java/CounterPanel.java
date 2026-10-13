@@ -30,7 +30,6 @@ public class CounterPanel extends JPanel {
   public CounterPanel() {
     add(label);
     add(button);
-    // TODO: add an action listener to `button` (see Chapter 4.3:
     button.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
