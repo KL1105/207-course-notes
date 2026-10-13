@@ -26,4 +26,23 @@ interface Chargeable {
 '       (with their fields and methods), then add the arrows between all four
 '       types.
 
+abstract class Vehicle {
+  + charge() : void
+}
+
+' Extends class Vehicle but does not realize Chargeable
+class Car {
+  + fillUp() : void
+}
+
+' Extends class Vehicle and also realizes interface Chargeable
+class ElectricCar {
+ + charge() : void
+}
+
+Vehicle <|-- Car
+Vehicle <|-- ElectricCar
+
+Chargeable <|.. ElectricCar
+
 @enduml
