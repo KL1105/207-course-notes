@@ -52,7 +52,7 @@ public class Temperature {
    */
   public static Temperature fromCelsius(double celsius) {
     // TODO: return a Temperature for this Celsius value.
-    return null;
+    return new Temperature(celsius);
   }
 
   /**
@@ -65,6 +65,6 @@ public class Temperature {
   public static Temperature fromFahrenheit(double fahrenheit) {
     // TODO: convert Fahrenheit to Celsius, (fahrenheit - 32) * 5 / 9, and return
     //       a Temperature for it.
-    return null;
+    return new Temperature((fahrenheit - 32) * 5 / 9);
   }
 }
